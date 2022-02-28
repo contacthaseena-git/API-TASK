@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SortRectangles.Model;
 
@@ -10,7 +11,7 @@ using SortRectangles.Model;
 
 namespace SortRectangles.Controller
 {
-    public class RectangleController: ControllerBase
+    public class RectangleController : ControllerBase
     {
         private readonly IRectangle Rect;
         public RectangleController(IRectangle rect)
@@ -21,7 +22,8 @@ namespace SortRectangles.Controller
         [HttpGet]
         [Route("")]
         [Route("Rectangle")]
-        public IActionResult RectangleSort(List<Rectangle> rectangles)
+        [AllowAnonymous]
+        public IActionResult RectangleSort([FromBody] List<Rectangle> rectangles)
         {
             try
             {
@@ -32,7 +34,7 @@ namespace SortRectangles.Controller
                 var SortedRectangles = Rect.GetSortedRectngles(rectangles);
                 return Ok(SortedRectangles);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return StatusCode(505, ex.Message);
             }
