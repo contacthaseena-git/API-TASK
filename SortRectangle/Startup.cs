@@ -30,7 +30,7 @@ namespace SortRectangles
                 app.UseDeveloperExceptionPage();
             }
           
-           // app.UseMvc();
+            app.UseMvc();
            
         }
     }
