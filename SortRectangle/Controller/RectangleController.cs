@@ -34,9 +34,9 @@ namespace SortRectangles.Controller
                 var SortedRectangles = Rect.GetSortedRectngles(rectangles);
                 return Ok(SortedRectangles);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return StatusCode(505, ex.Message);
+                return BadRequest(e.Message);
             }
         }
     }
